@@ -1,0 +1,93 @@
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.todoapp {
+  margin-top: 20px;
+}
+
+.todoapp {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+h1 {
+  font-size: 4em;
+}
+
+.new-todo {
+  width: 100%;
+}
+
+.main {
+  margin-top: 5px;
+}
+
+.filters, .todo-list {
+  padding-left: 0;
+}
+
+.todo-list li {
+  list-style: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 100%
+}
+
+.todo-list li.hidden {
+  display: none;
+}
+
+.todo-list li input, .todo-list li label {
+  float: left;
+}
+
+.todo-list li label {
+  word-break: break-all;
+}
+
+.todo-list li input {
+  margin-right: 10px;
+}
+
+.todo-list li label.complete {
+  text-decoration: line-through;
+  color: #999
+}
+
+.todo-list li label.incomplete {
+  text-decoration: none;
+}
+
+.todo-list li button {
+  float: right;
+}
+
+.filters li {
+  display: inline-block;
+  list-style: none;
+  font-size: 0.8em;
+  border: 1px solid #999;
+  border-radius: 5px;
+  padding: 3px;
+  cursor: pointer;
+  color: #999;
+}
+
+.filters li:hover {
+  border: 1px solid black;
+}
+
+.filters li.selected {
+  color: #000;
+  border: 1px solid black;
+}

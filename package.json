@@ -1,0 +1,45 @@
+{
+  "name": "vanillajs-todo",
+  "version": "0.0.1",
+  "description": "Testing sandbox",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "webpack-dev-server --open",
+    "build": "rimraf dist/development && yarn dev:build && rimraf dist/production && yarn prod:build",
+    "dev:build": "rimraf dist/development && cross-env NODE_ENV=development webpack",
+    "prod:build": "rimraf dist/production && cross-env NODE_ENV=production webpack -p",
+    "lint": "eslint ./",
+    "test": "yarn lint",
+    "precommit": "yarn test",
+    "prepush": "yarn test && yarn build"
+  },
+  "keywords": [
+    "test",
+    "js",
+    "javascript",
+    "nodejs"
+  ],
+  "author": "Nakshatra Mukhopadhyay",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.5.1",
+    "cross-env": "^5.0.0",
+    "css-loader": "^0.28.3",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "html-webpack-plugin": "^2.28.0",
+    "husky": "^0.13.4",
+    "rimraf": "^2.6.1",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
+  }
+}
