@@ -9,7 +9,7 @@
     "dev:build": "rimraf dist/development && cross-env NODE_ENV=development webpack",
     "prod:build": "rimraf dist/production && cross-env NODE_ENV=production webpack -p",
     "lint": "eslint ./",
-    "test": "yarn lint",
+    "test": "mocha-phantomjs ./tests/test.html",
     "precommit": "yarn test",
     "prepush": "yarn test && yarn build"
   },
@@ -26,6 +26,7 @@
     "babel-cli": "^6.24.1",
     "babel-loader": "^7.0.0",
     "babel-preset-env": "^1.5.1",
+    "chai": "^4.0.0",
     "cross-env": "^5.0.0",
     "css-loader": "^0.28.3",
     "eslint": "^3.19.0",
@@ -38,6 +39,9 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "html-webpack-plugin": "^2.28.0",
     "husky": "^0.13.4",
+    "mocha": "^3.4.2",
+    "mocha-phantomjs": "^4.1.0",
+    "phantomjs": "^2.1.7",
     "rimraf": "^2.6.1",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"

@@ -1,0 +1,17 @@
+{
+  "name": "test_case",
+  "version": "0.0.1",
+  "description": "Testing sandbox",
+  "main": "test_code.js",
+  "scripts": {
+    "test": "mocha"
+
+  },
+  "author": "Prerana Singh",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.0.0",
+    "jasmine": "^2.6.0",
+    "mocha": "^3.4.2"
+  }
+}

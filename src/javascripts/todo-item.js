@@ -87,4 +87,4 @@ class TodoItem {
   }
 }
 
-export default TodoItem
+return TodoItem
