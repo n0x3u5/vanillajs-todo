@@ -87,4 +87,4 @@ class TodoItem {
   }
 }
 
-module.exports = TodoItem
+export default TodoItem
