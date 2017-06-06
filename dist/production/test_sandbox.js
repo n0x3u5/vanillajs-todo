@@ -1,2 +1,271 @@
-!function(t){function e(i){if(n[i])return n[i].exports;var o=n[i]={i:i,l:!1,exports:{}};return t[i].call(o.exports,o,o.exports,e),o.l=!0,o.exports}var n={};e.m=t,e.c=n,e.i=function(t){return t},e.d=function(t,n,i){e.o(t,n)||Object.defineProperty(t,n,{configurable:!1,enumerable:!0,get:i})},e.n=function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,"a",n),n},e.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},e.p="",e(e.s=4)}([function(t,e,n){"use strict";function i(t){if(Array.isArray(t)){for(var e=0,n=Array(t.length);e<t.length;e++)n[e]=t[e];return n}return Array.from(t)}function o(t){l=t,r=[].concat(i(document.querySelector(".filters").children)),r.forEach(function(t){"selected"===t.getAttribute("class")&&(u=t),t.addEventListener("click",function(){s(t)})})}function s(t){var e="selected"===t.getAttribute("class"),n="";e||(u.setAttribute("class",""),t.setAttribute("class","selected"),u=t,n="Active"===u.innerHTML?"incomplete":"Completed"===u.innerHTML?"complete":"all",l.updateListView(n))}Object.defineProperty(e,"__esModule",{value:!0});var l={},r=[],u={};e.default=o},function(t,e,n){"use strict";function i(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(e,"__esModule",{value:!0});var o=function(){function t(t,e){for(var n=0;n<e.length;n++){var i=e[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(t,i.key,i)}}return function(e,n,i){return n&&t(e.prototype,n),i&&t(e,i),e}}(),s=n(5),l=function(t){return t&&t.__esModule?t:{default:t}}(s),r=function(){function t(e){var n=this;i(this,t),this.todoItems=[],this.invisibles=e,this.toggleAll=document.querySelector(".toggle-all"),this.todoList=document.querySelector(".todo-list"),this.todoCounter=document.querySelector(".todo-count"),this.clearCompletedBtn=document.querySelector(".clear-completed"),this.statusAll="incomplete",this.activeFilter="all",this.incompleteCount=0,this.toggleInvisibles(),this.toggleAll.addEventListener("click",function(){n.toggleStatusAll(),n.updateIncompleteCount()}),this.clearCompletedBtn.addEventListener("click",function(){n.clearCompleted()})}return o(t,[{key:"addItem",value:function(t){var e=this,n=new l.default(t),i=n.getListItem();this.todoItems.push(n),this.todoList.appendChild(i),this.updateIncompleteCount(),n.checkBox.addEventListener("click",function(){e.statusAll="incomplete",e.toggleAll.checked=!1,e.updateIncompleteCount()}),n.disposeBtn.addEventListener("click",function(){e.todoItems.splice(e.todoItems.indexOf(n),1),e.updateIncompleteCount()})}},{key:"updateIncompleteCount",value:function(){var t=this;this.incompleteCount=0,this.todoItems.forEach(function(e){"incomplete"===e.itemStatus&&t.incompleteCount++}),this.incompleteCount>0?1===this.incompleteCount?this.todoCounter.innerHTML=this.incompleteCount+" item left.":this.todoCounter.innerHTML=this.incompleteCount+" items left.":this.todoCounter.innerHTML="",this.updateListView(this.activeFilter),this.toggleInvisibles()}},{key:"setStatusAll",value:function(t){this.todoItems.forEach(function(e){e.setStatus(t)})}},{key:"toggleInvisibles",value:function(){var t=this;this.invisibles.forEach(function(e){t.todoItems.length>0?e.classList.remove("invisible"):e.classList.add("invisible")})}},{key:"toggleStatusAll",value:function(){"complete"===this.statusAll?this.statusAll="incomplete":this.statusAll="complete",this.setStatusAll(this.statusAll)}},{key:"clearCompleted",value:function(){var t=this,e=[];this.todoItems.forEach(function(t){"complete"===t.itemStatus&&(e.push(t),t.dispose())}),e.forEach(function(e){t.todoItems.splice(t.todoItems.indexOf(e),1)}),this.toggleAll.checked=!1,this.updateIncompleteCount()}},{key:"updateListView",value:function(t){var e=this.todoItems,n=[];this.activeFilter=t,n="all"===t?e:e.filter(function(e){return e.itemStatus===t}),e.forEach(function(t){var e=t.getListItem(),i=e.classList;n.includes(t)?i.remove("hidden"):i.add("hidden")})}}]),t}();e.default=r},function(t,e,n){"use strict";function i(t){return 13===t}Object.defineProperty(e,"__esModule",{value:!0}),e.isReturnPressed=i},function(t,e){},function(t,e,n){"use strict";function i(t){return t&&t.__esModule?t:{default:t}}var o=n(1),s=i(o),l=n(0),r=i(l),u=n(2);n(3);var c=document.querySelector(".new-todo"),a=document.querySelector(".toggle-all"),d=document.querySelector(".toggle-all-label"),f=document.querySelector(".footer"),h=[a,d,f],m=new s.default(h);(0,r.default)(m),c.addEventListener("keyup",function(t){var e=t.keyCode?t.keyCode:t.which;(0,u.isReturnPressed)(e)&&(m.addItem(c.value),c.value="")})},function(t,e,n){"use strict";function i(t){if(Array.isArray(t)){for(var e=0,n=Array(t.length);e<t.length;e++)n[e]=t[e];return n}return Array.from(t)}function o(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(e,"__esModule",{value:!0});var s=function(){function t(t,e){for(var n=0;n<e.length;n++){var i=e[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(t,i.key,i)}}return function(e,n,i){return n&&t(e.prototype,n),i&&t(e,i),e}}(),l=function(){function t(e){o(this,t),this.checkBox=this.createCheckBox(),this.label=this.createLabel(e),this.disposeBtn=this.createDisposeBtn(),this.listItem=this.createListItem(),this.itemStatus="incomplete"}return s(t,[{key:"createCheckBox",value:function(){var t=this,e=document.createElement("input");return e.setAttribute("type","checkbox"),e.setAttribute("class","todo-status"),e.addEventListener("click",function(){t.toggleStatus()}),e}},{key:"createLabel",value:function(t){var e=document.createElement("label");return e.setAttribute("for","todo-status"),e.setAttribute("class","not-done"),e.innerHTML=t,e}},{key:"createDisposeBtn",value:function(){var t=this,e=document.createElement("button");return e.setAttribute("class","dispose-btn"),e.innerHTML="&#10006;",e.addEventListener("click",function(){t.dispose()}),e}},{key:"createListItem",value:function(){var t=document.createElement("li");return t.appendChild(this.checkBox),t.appendChild(this.label),t.appendChild(this.disposeBtn),t.setAttribute("class","clearfix"),t}},{key:"getListItem",value:function(){return this.listItem}},{key:"updateTask",value:function(t){this.label.innerHTML=t}},{key:"setStatus",value:function(t){this.label.setAttribute("class",t),this.itemStatus=t,this.checkBox.checked="incomplete"!==t}},{key:"toggleStatus",value:function(){"complete"===this.label.getAttribute("class")?this.setStatus("incomplete"):this.setStatus("complete")}},{key:"dispose",value:function(){[].concat(i(this.listItem.children)).forEach(function(t){t.remove()}),this.listItem.remove()}}]),t}();e.default=l}]);
-//# sourceMappingURL=test_sandbox.js.map
+!function(a) {
+    function b(d) {
+        if (c[d]) return c[d].exports;
+        var e = c[d] = {
+            i: d,
+            l: !1,
+            exports: {}
+        };
+        return a[d].call(e.exports, e, e.exports, b), e.l = !0, e.exports;
+    }
+    var c = {};
+    b.m = a, b.c = c, b.i = function(a) {
+        return a;
+    }, b.d = function(a, c, d) {
+        b.o(a, c) || Object.defineProperty(a, c, {
+            configurable: !1,
+            enumerable: !0,
+            get: d
+        });
+    }, b.n = function(a) {
+        var c = a && a.__esModule ? function() {
+            return a.default;
+        } : function() {
+            return a;
+        };
+        return b.d(c, "a", c), c;
+    }, b.o = function(a, b) {
+        return Object.prototype.hasOwnProperty.call(a, b);
+    }, b.p = "", b(b.s = 4);
+}([ function(a, b, c) {
+    "use strict";
+    function d(a) {
+        if (Array.isArray(a)) {
+            for (var b = 0, c = Array(a.length); b < a.length; b++) c[b] = a[b];
+            return c;
+        }
+        return Array.from(a);
+    }
+    function e(a) {
+        g = a, h = [].concat(d(document.querySelector(".filters").children)), h.forEach(function(a) {
+            "selected" === a.getAttribute("class") && (i = a), a.addEventListener("click", function() {
+                f(a);
+            });
+        });
+    }
+    function f(a) {
+        var b = "selected" === a.getAttribute("class"), c = "";
+        b || (i.setAttribute("class", ""), a.setAttribute("class", "selected"), i = a, c = "Active" === i.innerHTML ? "incomplete" : "Completed" === i.innerHTML ? "complete" : "all", 
+        g.updateListView(c));
+    }
+    Object.defineProperty(b, "__esModule", {
+        value: !0
+    });
+    var g = {}, h = [], i = {};
+    b.default = e;
+}, function(a, b, c) {
+    "use strict";
+    function d(a, b) {
+        if (!(a instanceof b)) throw new TypeError("Cannot call a class as a function");
+    }
+    Object.defineProperty(b, "__esModule", {
+        value: !0
+    });
+    var e = function() {
+        function a(a, b) {
+            for (var c = 0; c < b.length; c++) {
+                var d = b[c];
+                d.enumerable = d.enumerable || !1, d.configurable = !0, "value" in d && (d.writable = !0), 
+                Object.defineProperty(a, d.key, d);
+            }
+        }
+        return function(b, c, d) {
+            return c && a(b.prototype, c), d && a(b, d), b;
+        };
+    }(), f = c(5), g = function(a) {
+        return a && a.__esModule ? a : {
+            "default": a
+        };
+    }(f), h = function() {
+        function a(b) {
+            var c = this;
+            d(this, a), this.todoItems = [], this.invisibles = b, this.toggleAll = document.querySelector(".toggle-all"), 
+            this.todoList = document.querySelector(".todo-list"), this.todoCounter = document.querySelector(".todo-count"), 
+            this.clearCompletedBtn = document.querySelector(".clear-completed"), this.statusAll = "incomplete", 
+            this.activeFilter = "all", this.incompleteCount = 0, this.toggleInvisibles(), this.toggleAll.addEventListener("click", function() {
+                c.toggleStatusAll(), c.updateIncompleteCount();
+            }), this.clearCompletedBtn.addEventListener("click", function() {
+                c.clearCompleted();
+            });
+        }
+        return e(a, [ {
+            key: "addItem",
+            value: function(a) {
+                var b = this, c = new g.default(a), d = c.getListItem();
+                this.todoItems.push(c), this.todoList.appendChild(d), this.updateIncompleteCount(), 
+                c.checkBox.addEventListener("click", function() {
+                    b.statusAll = "incomplete", b.toggleAll.checked = !1, b.updateIncompleteCount();
+                }), c.disposeBtn.addEventListener("click", function() {
+                    b.todoItems.splice(b.todoItems.indexOf(c), 1), b.updateIncompleteCount();
+                });
+            }
+        }, {
+            key: "updateIncompleteCount",
+            value: function() {
+                var a = this;
+                this.incompleteCount = 0, this.todoItems.forEach(function(b) {
+                    "incomplete" === b.itemStatus && a.incompleteCount++;
+                }), this.incompleteCount > 0 ? 1 === this.incompleteCount ? this.todoCounter.innerHTML = this.incompleteCount + " item left." : this.todoCounter.innerHTML = this.incompleteCount + " items left." : this.todoCounter.innerHTML = "", 
+                this.updateListView(this.activeFilter), this.toggleInvisibles();
+            }
+        }, {
+            key: "setStatusAll",
+            value: function(a) {
+                this.todoItems.forEach(function(b) {
+                    b.setStatus(a);
+                });
+            }
+        }, {
+            key: "toggleInvisibles",
+            value: function() {
+                var a = this;
+                this.invisibles.forEach(function(b) {
+                    a.todoItems.length > 0 ? b.classList.remove("invisible") : b.classList.add("invisible");
+                });
+            }
+        }, {
+            key: "toggleStatusAll",
+            value: function() {
+                "complete" === this.statusAll ? this.statusAll = "incomplete" : this.statusAll = "complete", 
+                this.setStatusAll(this.statusAll);
+            }
+        }, {
+            key: "clearCompleted",
+            value: function() {
+                var a = this, b = [];
+                this.todoItems.forEach(function(a) {
+                    "complete" === a.itemStatus && (b.push(a), a.dispose());
+                }), b.forEach(function(b) {
+                    a.todoItems.splice(a.todoItems.indexOf(b), 1);
+                }), this.toggleAll.checked = !1, this.updateIncompleteCount();
+            }
+        }, {
+            key: "updateListView",
+            value: function(a) {
+                var b = this.todoItems, c = [];
+                this.activeFilter = a, c = "all" === a ? b : b.filter(function(b) {
+                    return b.itemStatus === a;
+                }), b.forEach(function(a) {
+                    var b = a.getListItem(), d = b.classList;
+                    c.includes(a) ? d.remove("hidden") : d.add("hidden");
+                });
+            }
+        } ]), a;
+    }();
+    b.default = h;
+}, function(a, b, c) {
+    "use strict";
+    function d(a) {
+        return 13 === a;
+    }
+    Object.defineProperty(b, "__esModule", {
+        value: !0
+    }), b.isReturnPressed = d;
+}, function(a, b) {}, function(a, b, c) {
+    "use strict";
+    function d(a) {
+        return a && a.__esModule ? a : {
+            "default": a
+        };
+    }
+    var e = c(1), f = d(e), g = c(0), h = d(g), i = c(2);
+    c(3);
+    var j = document.querySelector(".new-todo"), k = document.querySelector(".toggle-all"), l = document.querySelector(".toggle-all-label"), m = document.querySelector(".footer"), n = [ k, l, m ], o = new f.default(n);
+    h.default(o), j.addEventListener("keyup", function(a) {
+        var b = a.keyCode ? a.keyCode : a.which;
+        i.isReturnPressed(b) && (o.addItem(j.value), j.value = "");
+    });
+}, function(a, b, c) {
+    "use strict";
+    function d(a) {
+        if (Array.isArray(a)) {
+            for (var b = 0, c = Array(a.length); b < a.length; b++) c[b] = a[b];
+            return c;
+        }
+        return Array.from(a);
+    }
+    function e(a, b) {
+        if (!(a instanceof b)) throw new TypeError("Cannot call a class as a function");
+    }
+    Object.defineProperty(b, "__esModule", {
+        value: !0
+    });
+    var f = function() {
+        function a(a, b) {
+            for (var c = 0; c < b.length; c++) {
+                var d = b[c];
+                d.enumerable = d.enumerable || !1, d.configurable = !0, "value" in d && (d.writable = !0), 
+                Object.defineProperty(a, d.key, d);
+            }
+        }
+        return function(b, c, d) {
+            return c && a(b.prototype, c), d && a(b, d), b;
+        };
+    }(), g = function() {
+        function a(b) {
+            e(this, a), this.checkBox = this.createCheckBox(), this.label = this.createLabel(b), 
+            this.disposeBtn = this.createDisposeBtn(), this.listItem = this.createListItem(), 
+            this.itemStatus = "incomplete";
+        }
+        return f(a, [ {
+            key: "createCheckBox",
+            value: function() {
+                var a = this, b = document.createElement("input");
+                return b.setAttribute("type", "checkbox"), b.setAttribute("class", "todo-status"), 
+                b.addEventListener("click", function() {
+                    a.toggleStatus();
+                }), b;
+            }
+        }, {
+            key: "createLabel",
+            value: function(a) {
+                var b = document.createElement("label");
+                return b.setAttribute("for", "todo-status"), b.setAttribute("class", "not-done"), 
+                b.innerHTML = a, b;
+            }
+        }, {
+            key: "createDisposeBtn",
+            value: function() {
+                var a = this, b = document.createElement("button");
+                return b.setAttribute("class", "dispose-btn"), b.innerHTML = "&#10006;", b.addEventListener("click", function() {
+                    a.dispose();
+                }), b;
+            }
+        }, {
+            key: "createListItem",
+            value: function() {
+                var a = document.createElement("li");
+                return a.appendChild(this.checkBox), a.appendChild(this.label), a.appendChild(this.disposeBtn), 
+                a.setAttribute("class", "clearfix"), a;
+            }
+        }, {
+            key: "getListItem",
+            value: function() {
+                return this.listItem;
+            }
+        }, {
+            key: "updateTask",
+            value: function(a) {
+                this.label.innerHTML = a;
+            }
+        }, {
+            key: "setStatus",
+            value: function(a) {
+                this.label.setAttribute("class", a), this.itemStatus = a, this.checkBox.checked = "incomplete" !== a;
+            }
+        }, {
+            key: "toggleStatus",
+            value: function() {
+                "complete" === this.label.getAttribute("class") ? this.setStatus("incomplete") : this.setStatus("complete");
+            }
+        }, {
+            key: "dispose",
+            value: function() {
+                [].concat(d(this.listItem.children)).forEach(function(a) {
+                    a.remove();
+                }), this.listItem.remove();
+            }
+        } ]), a;
+    }();
+    b.default = g;
+} ]);

@@ -1,4 +1,4 @@
-import TodoItem from './todo-item'
+var TodoItem = require('./todo-item')
 
 class TodoList {
   constructor (invisibles) {
@@ -138,4 +138,4 @@ class TodoList {
   }
 }
 
-export default TodoList
+module.exports = TodoList 
