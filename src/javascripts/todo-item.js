@@ -87,4 +87,4 @@ class TodoItem {
   }
 }
 
-return TodoItem
+module.exports = TodoItem
