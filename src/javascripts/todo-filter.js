@@ -39,4 +39,4 @@ function updateFilter (filter) {
   }
 }
 
-module.exports = prepFilters
+export default prepFilters
